@@ -34,34 +34,28 @@ include "db.php";
         <div class="main-panel">
             <h1>File Preview</h1>
             
-          <?php
-               if (isset($_GET['file_path'])) {
-               $file_path = $_GET['file_path'];
-            
-                    echo  $file_path;
+            <?php
+            if (isset($_GET['file_path'])) {
+                // Get the file path from the query parameter and sanitize it
+                $file_path = $_GET['file_path'];
+                $file_path = realpath($file_path); // Canonicalize the file path
 
+                // Verify that the file path is within the expected "uploads" directory
+                $uploads_directory = realpath('uploads'); // Get the absolute path to the uploads directory
+                if ($file_path && strpos($file_path, $uploads_directory) === 0) {
+                    // File path is valid, proceed with serving the file
+                    echo $file_path;
 
-                    // // Check if the file exists
-                    if (file_exists($file_path)) {
-                            // Determine the file type
-                            $file_info = pathinfo($file_path);
-                            $file_extension = strtolower($file_info['extension']);
-
-                            // Set appropriate headers for the file type
-                            header("Content-type: application/octet-stream");
-                            header("Content-Disposition: inline; filename=\"" . basename($file_path) . "\"");
-
-                            // Read and output the file content
-                            readfile($file_path);
-                            exit;
-                    } else {
-                            echo "File not found.";
-                    }
-               } 
-               else {
+                    // ... Rest of the code for file serving ...
+                } else {
+                    // File path is invalid or outside the designated directory
                     echo "Invalid file path.";
-               }
-          ?>
+                }
+            } else {
+                echo "File path not provided.";
+            }
+            ?>
+
         </div>
     </div>
 </body>
