@@ -1,58 +1,90 @@
+<?php 
+
+include "db.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern Dashboard</title>
+    
     <link rel="stylesheet" href="custom-styles.css">
     <script src="main.js" defer></script>
+
     <!-- Add any additional libraries or stylesheets here if needed -->
+    <script src="https://kit.fontawesome.com/ac574313ed.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
     <div class="dashboard">
         <div class="sidebar">
-            <div class="logo">Your Dashboard</div>
+            <div class="logo">Home Dashboard</div>
             <ul class="menu">
-                <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-                <li><a href="#"><i class="fa fa-chart-bar"></i> Analytics</a></li>
-                <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+                <li><a href="index.php"><i class="fa fa-home"></i></a></li>
+                <li><a href="users.php"><i class="fa fa-user"></i></a></li>
+                <li><a href="#"><i class="fa fa-file"></i></a></li>
+                <li><a href="#"><i class="fa fa-pencil"></i></a></li>
+                <li><a href="#"><i class="fa fa-trash"></i></a></li>
                 <!-- Add more menu items as needed -->
             </ul>
         </div>
         <div class="main-panel">
-            <h1>Welcome to Your Dashboard</h1>
+            <h1>Home Dashboard</h1>
+            <h3>All Users</h3>
             <div class="table-container">
                 <table>
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Age</th>
+                            <th>File</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                             <!-- Add more table headers as needed -->
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>johndoe@example.com</td>
-                            <td>30</td>
-                        </tr>
+                            <?php 
+                                // Process the result (you can loop through the rows to display or manipulate the data)
+                                if (mysqli_num_rows($result) > 0) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                                
+                                <tr>
+                                    <td><?php echo $row['id']; ?></td>
+                                    <td><?php echo $row['name']; ?></td>
+                                    <td><?php echo $row['email']; ?></td>
+                                    <td> 
+                                        <a href='preview_file.php?file_path=<?php echo urlencode($row['file_path']); ?>'>
+                                            <i class='fa fa-eye'></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href='update_user.php?id=<?php echo $row['id'] ; ?>'>
+                                            <i class='fa fa-pencil'></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href='delete_user.php?id=<?php echo $row['file_path']; ?>'>
+                                            <i class='fa fa-trash'></i>
+                                        </a>
+                                    </td>
+                                </tr>         
+                            <?php               
+                                    }
+                                } else {
+                                    echo "No records found.";
+                                }
+                                    
+                            ?>
                         <!-- Add more table rows as needed -->
                     </tbody>
                 </table>
             </div>
-            <form class="data-form">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-                
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-                
-                <label for="age">Age:</label>
-                <input type="number" id="age" name="age" required>
-                
-                <button type="submit">Submit</button>
-            </form>
         </div>
     </div>
 </body>
