@@ -17,18 +17,30 @@
         <div class="sidebar">
             <div class="logo">User Dashboard</div>
             <ul class="menu">
-                <li><a href="index.php"><i class="fa fa-home"></i></a></li>
                 <li><a href="users.php"><i class="fa fa-user"></i></a></li>
-                <li><a href="db.php"><i class="fa fa-database"></i></a></li>
-                <li><a href="#"><i class="fa fa-pencil"></i></a></li>
-                <li><a href="#"><i class="fa fa-trash"></i></a></li>
+                <li><a href="add_user.php"><i class="fa fa-plus"></i></a></li>
                 <!-- Add more menu items as needed -->
             </ul>
         </div>
         <div class="main-panel">
             <h1>Update User</h1>
             <?php 
-                
+
+              // Database credentials
+               $host = "localhost"; // Change this to your database host if it's different
+               $username = "root"; // Replace with your database username
+               $password = ""; // Replace with your database password
+               $database = "webapp"; // The name of your database
+
+               // Create a connection to the database
+               $conn = mysqli_connect($host, $username, $password, $database);
+                // Retrieve the data to pre-fill the form
+               if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
+                    $sql = "SELECT * FROM users WHERE id='$id'";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($result);
+               }
             
             ?>
                <form method="post" action="edit_user.php">

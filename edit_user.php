@@ -22,7 +22,7 @@ if (isset($_POST['update'])) {
      $sql = "UPDATE users SET name='$name', email='$email' WHERE id='$id'";
      if (mysqli_query($conn, $sql)) {
          echo "Data updated successfully!";
-         header("Location: index.php");
+         header("Location: users.php");
      } else {
          echo "Error updating data: " . mysqli_error($conn);
      }
@@ -36,6 +36,7 @@ if (isset($_POST['update'])) {
      $row = mysqli_fetch_assoc($result);
  }
  
+ mysqli_close($conn);
 
 
 

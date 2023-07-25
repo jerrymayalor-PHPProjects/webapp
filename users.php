@@ -68,7 +68,7 @@ include "db.php";
                                         </a>
                                     </td>
                                     <td>
-                                        <a href='delete_user.php?id=<?php echo $row['file_path']; ?>'>
+                                        <a href='delete_user.php?id=<?php echo $row['id']; ?>'>
                                             <i class='fa fa-trash'></i>
                                         </a>
                                     </td>

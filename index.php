@@ -24,9 +24,7 @@ include "db.php";
             <div class="logo">Home Dashboard</div>
             <ul class="menu">
                 <li><a href="users.php"><i class="fa fa-user"></i></a></li>
-                <li><a href="#"><i class="fa fa-file"></i></a></li>
-                <li><a href="#"><i class="fa fa-pencil"></i></a></li>
-                <li><a href="#"><i class="fa fa-trash"></i></a></li>
+                <li><a href="add_user.php"><i class="fa fa-plus"></i></a></li>
                 <!-- Add more menu items as needed -->
             </ul>
         </div>
