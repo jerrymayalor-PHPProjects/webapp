@@ -1,44 +1,41 @@
-<?php 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Dashboard</title>
+    
+    <link rel="stylesheet" href="custom-styles.css">
+    <script src="main.js" defer></script>
 
-// require "db.php";
+    <!-- Add any additional libraries or stylesheets here if needed -->
+    <script src="https://kit.fontawesome.com/ac574313ed.js" crossorigin="anonymous"></script>
 
-// Database credentials
-$host = "localhost"; // Change this to your database host if it's different
-$username = "root"; // Replace with your database username
-$password = ""; // Replace with your database password
-$database = "webapp"; // The name of your database
-
-// Create a connection to the database
-$conn = mysqli_connect($host, $username, $password, $database);
-
-// Process form data
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-     // Get form data
-     $name = $_POST["name"];
-     $email = $_POST["email"];
-     // The file input requires special handling
-     $file_name = $_FILES["fileInput"]["name"];
-     $file_tmp = $_FILES["fileInput"]["tmp_name"];
-     
-     // Move the uploaded file to a desired directory (e.g., "uploads/")
-     $upload_dir = "uploads/";
-     $file_path = $upload_dir . $file_name;
-     // move_uploaded_file($file_tmp, $file_path);
-
-     // echo $file_path;
-     
-     // Insert the data into the database
-     $sql = "INSERT INTO users (name, email, file_path) VALUES ('$name', '$email', '$file_path')";
-     // var_dump($sql);
-
-     if (mysqli_query($conn, $sql)) {
-         echo "Data inserted successfully!";
-         header("Location: index.php");
-     } else {
-         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-     }
- }
- 
-
-
-
+</head>
+<body>
+    <div class="dashboard">
+        <div class="sidebar">
+            <div class="logo">User Dashboard</div>
+            <ul class="menu">
+                <li><a href="users.php"><i class="fa fa-user"></i></a></li>
+                <!-- Add more menu items as needed -->
+            </ul>
+        </div>
+        <div class="main-panel">
+            <h1>Add User</h1>
+                <form class="data-form" action="insert_user.php" method="post" enctype="multipart/form-data">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                        
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                        
+                <label for="fileInput">Choose a File:</label>
+                <input type="file" id="fileInput" name="fileInput">
+                        
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

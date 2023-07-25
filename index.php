@@ -23,7 +23,6 @@ include "db.php";
         <div class="sidebar">
             <div class="logo">Home Dashboard</div>
             <ul class="menu">
-                <li><a href="index.php"><i class="fa fa-home"></i></a></li>
                 <li><a href="users.php"><i class="fa fa-user"></i></a></li>
                 <li><a href="#"><i class="fa fa-file"></i></a></li>
                 <li><a href="#"><i class="fa fa-pencil"></i></a></li>
